@@ -217,8 +217,7 @@ def adjust_data(df):
             lambda x: len(x) == 5))]
         incomplete.extend(st)
 
-
-    df.drop_duplicates(inplace=True, subset=['Address', 'City', 'State',
+    df.drop_duplicates(inplace=True, subset=['Name', 'Address', 'City', 'State',
         'Zip', 'Phone'])
     # takes care of individual Nones
     df.replace({None : ''}, inplace=True)
@@ -268,6 +267,7 @@ def split_contacts(str):
             new.insert(3, temp[-1::][0])
             new.insert(3, temp[-2:-1:][0])
             new[2] = ' '.join(temp[:-2:])
+        new = [s.strip() for s in new]
         return new
     except IndexError:
         print(f"   INDEX ERROR at {' '.join(new)}, appending to incomplete")
