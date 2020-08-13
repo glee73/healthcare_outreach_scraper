@@ -20,9 +20,9 @@ scraping the city URLs, then went through the cities and extracted the shelter
 URLs into a set (there were always duplicate listings in many of the cities, 
 sometimes even ones in neighboring states). Then, I parsed the names, addresses,
 and contact info of each shelter into a global list, which I would eventually 
-turn into a dataframe, remove the duplicates, and clean the information into the
-appropriate columns. I used the requests package to access the URLs, as well as 
-sleep from the time package to avoid overwhelming the server.
+turn into a dataframe, remove remaining duplicates, and clean the information into
+the appropriate columns. I used the requests package to access the URLs, as well 
+as sleep from the time package to avoid overwhelming the server.
 
 BUGS/SHORTCOMINGS:
 
