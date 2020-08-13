@@ -16,9 +16,13 @@ states = np.array(['alabama', 'alaska', 'arizona', 'arkansas', 'california',
     'southdakota', 'tennessee', 'texas', 'utah', 'vermont', 'virginia',
     'washington', 'westvirginia', 'wisconsin', 'wyoming'])
 
+# store listings with odd formatting, to be printed at the end
 incomplete = []
-total_requests = 0
+
+#convert scraped listings into dataframe
 for_dataframe = []
+
+total_requests = 0
 
 def fill_csv():
     """
@@ -60,7 +64,7 @@ def scrape():
             print(f'    finished looking at {city}')
             cities = np.delete(cities, 0)
         broken = ('https://www.homelessshelterdirectory.org/cgi-bin/id/' +
-            'shelter.cgi?shelter=')      # broken entry
+            'shelter.cgi?shelter=')      # broken entry that appears often
         if broken in shelter_urls:
             shelter_urls.remove(broken)
         print(f'\n  completed shelter urls for {states[0]}, ready to write')
@@ -108,7 +112,7 @@ def get_html(url):
     page = requests.get(url)
     code = bs(page.content, 'html.parser')
     global total_requests
-    total_requests += 1
+    total_requests += 1        # adjust counter
 
     return list(code.children)[2]
 
@@ -139,7 +143,8 @@ def create_df():
 
     new_df = pd.DataFrame(df['Info'].to_list(), columns=['Name', 'Address',
         'City', 'State', 'Zip', 'Phone', 'Web', 'Facebook', 'Twitter'])
-
+    
+    # store the dataframe temporarily - in case cleaning goes awry
     outfile = open('homeless_shelter_df', 'wb')
     pkl.dump(df, outfile)
     outfile.close()
@@ -156,7 +161,7 @@ def adjust_data(df):
     :param: dataframe
     :return: cleaned dataframe, ready to write to csv
     """
-    # these are all specific mixups I have seen
+    # these are all specific mixup cases
     def phone_in_zip():
         """
         switches columns when the zip column has a phone numbers (but honestly
@@ -219,7 +224,8 @@ def adjust_data(df):
 
     df.drop_duplicates(inplace=True, subset=['Name', 'Address', 'City', 'State',
         'Zip', 'Phone'])
-    # takes care of individual Nones
+    
+    # takes care of individual Nones - allows applying len() 
     df.replace({None : ''}, inplace=True)
 
     print('\n  dropped duplicate entries and replaced Nones with empty string')
@@ -231,7 +237,8 @@ def adjust_data(df):
     web_in_phone()
 
     wrong_values(df)
-
+    
+    # fb and twitter websites are not useful
     df.drop(['Facebook', 'Twitter'], axis=1, inplace=True)
 
     print('\n  finished cleaning data')
@@ -250,11 +257,12 @@ def split_contacts(str):
     new = ''
     for i in str:
         if i != '\n' and i != '\r' and i != ':' and i != ',':
-            # instead of calling replace 3 times, just rebuild
+            # instead of calling replace 3 times (3n), just rebuild (n)
             new = ''.join([new, i])
     new = [char for char in new.strip().split('  ') if char != '']
-    # city, state, and zipcode are often in one string - must separate
+   
     try:
+        # city, state, and zipcode are often in one string - must separate
         temp = new[2].split()
         # formatting can be very strange, hence the specific cases
         if len(temp) == 1 or (len(temp) == 2 and len(temp[-1]) > 2):
@@ -270,6 +278,7 @@ def split_contacts(str):
         new = [s.strip() for s in new]
         return new
     except IndexError:
+        # sometimes data has weird spacing or symbols, producing IndexError
         print(f"   INDEX ERROR at {' '.join(new)}, appending to incomplete")
         if new is not None:
             incomplete.append(new)
