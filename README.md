@@ -1,6 +1,6 @@
 INTRODUCTION:
 
-This webscraper was written for homelessshelterdirectory.org. I was leading part 
+This code was written to scrape homelessshelterdirectory.org. I was leading part 
 of a project at GetUsPPE.org where I needed a centralized database for all of the
 homeless shelters in the US. For one, we were conducting a risk analysis in 
 ArcGIS that needed the addresses of the shelters in a CSV. My team also needed 
