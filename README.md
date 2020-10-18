@@ -32,7 +32,8 @@ This was my first time working with real-life data, so I did not anticipate it
 to be so messy. I should have taken a look at more of the data before moving
 on to run my program on the entire website. If that had been the case, I would
 have caught special cases earlier and created an output file with cleaner data.
-But at the end of the day, this served our purposes quite well!
+But at the end of the day, this served our purposes quite well, and I learned a lot
+about working with real data in the process!
 
 Next time I write a web scraper, I will also look into multithreading because
 this was really slow.
