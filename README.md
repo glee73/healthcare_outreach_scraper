@@ -2,8 +2,8 @@ INTRODUCTION:
 
 This code was written to scrape homelessshelterdirectory.org. I was leading part 
 of a project at GetUsPPE.org where I needed a centralized database for all of the
-homeless shelters in the US. For one, we were conducting a risk analysis in 
-ArcGIS that needed the addresses of the shelters in a CSV. My team also needed 
+homeless shelters in the US. We were conducting a risk analysis in 
+ArcGIS that needed the addresses of the shelters in a CSV, and my team also needed 
 a more time-efficient way to compile a shelter call list.
 
 TECHNOLOGIES: 
@@ -12,8 +12,8 @@ BeautifulSoup, Pandas, Numpy
 
 OVERVIEW:
 
-My approach to web scraping the site as quite naive, but it was unavoidable 
-because there was no rhyme or reason to the URL addresses. The website was 
+My approach to web scraping the site was naive, but I feel like it was 
+unavoidable because there was no pattern to the URL addresses. The website was 
 structured so that each state had a page with all of its cities, and then each 
 city itself had a page full of shelter listings. I iterated through each state, 
 scraping the city URLs, then went through the cities and extracted the shelter 
