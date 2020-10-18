@@ -1,4 +1,4 @@
-## INTRODUCTION:
+# INTRODUCTION:
 
 This code was written to scrape homelessshelterdirectory.org. I was leading part 
 of a project at GetUsPPE.org where I needed a centralized database for all of the
@@ -6,11 +6,11 @@ homeless shelters in the US. We were conducting a risk analysis in
 ArcGIS that needed the addresses of the shelters in a CSV, and my team also needed 
 a more time-efficient way to compile a shelter call list.
 
-## TECHNOLOGIES: 
+# TECHNOLOGIES: 
 
 BeautifulSoup, Pandas, Numpy
 
-## OVERVIEW:
+# OVERVIEW:
 
 My approach to web scraping the site was naive, but I feel like it was 
 unavoidable because there was no pattern to the URL addresses. The website was 
@@ -24,7 +24,7 @@ turn into a dataframe, remove remaining duplicates, and clean the information in
 the appropriate columns. I used the requests package to access the URLs, as well 
 as sleep from the time package to avoid overwhelming the server.
 
-## BUGS/SHORTCOMINGS:
+# BUGS/SHORTCOMINGS:
 
 This was my first time working with real-life data, so I did not anticipate it
 to be so messy. I should have taken a look at more of the data before moving
